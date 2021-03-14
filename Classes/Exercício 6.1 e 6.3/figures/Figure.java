@@ -9,5 +9,6 @@ public abstract class Figure {
     int x, y;
     int w, h;
 
+    public abstract void Print();
     public abstract void Paint(Graphics g);
 }

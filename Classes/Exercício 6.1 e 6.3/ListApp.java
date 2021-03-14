@@ -66,7 +66,7 @@ class ListFrame extends JFrame {
             }
         );
 
-        this.setTitle("Lista de Retangulos");
+        this.setTitle("Lista de Figuras");
         this.setSize(350, 350);
     }
 
