@@ -20,7 +20,7 @@ public class Ellipse {
     }
 
     public void Print() {
-        System.out.format("Retangulo de tamanho (%d,%d) na posicao (%d,%d).\n",
+        System.out.format("Elipse de eixos (%d,%d) na posicao (%d,%d).\n",
             this.w, this.h, this.x, this.y);
     }
 
