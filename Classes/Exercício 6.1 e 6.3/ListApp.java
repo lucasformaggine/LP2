@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Random;
 import figures.*;
+import handlers.*;
 
 class ListApp {
     public static void main(String[] args) {
@@ -16,13 +17,11 @@ class ListFrame extends JFrame {
     private static final long serialVersionUID = 1L;
 
     ArrayList<Figure> figs = new ArrayList<Figure>();
-    
+
+    KeyPressedHandler Handler = new KeyPressedHandler();
+
     Random rand = new Random();
-
-    private Color getRandomColor() {
-        return new Color(rand.nextFloat(), rand.nextFloat(), rand.nextFloat());
-    }
-
+    
     ListFrame () {
         this.addWindowListener (
             new WindowAdapter() {
@@ -35,32 +34,12 @@ class ListFrame extends JFrame {
         this.addKeyListener (
             new KeyAdapter() {
                 public void keyPressed(KeyEvent evt) {
-                    int x1 = rand.nextInt(350);
-                    int y1 = rand.nextInt(350);
+                    Figure fig = Handler.HandleWithKey(evt);
 
-                    int x2 = rand.nextInt(350) % 200 + 100;
-                    int y2 = rand.nextInt(350) % 200 + 100;
-
-                    int x3 = rand.nextInt(350) % 200 + 100;
-                    int y3 = rand.nextInt(350) % 200 + 100;
-
-                    int w = rand.nextInt(50);
-                    int h = rand.nextInt(50);
-                    
-                    Color borderColor = getRandomColor();
-                    Color fillColor = getRandomColor();
-
-                    if (evt.getKeyChar() == 'r') {
-                        Rect r = new Rect(x1, y1, w, h, borderColor, fillColor);
-                        figs.add(r);
-                    } else if (evt.getKeyChar() == 'e') {
-                        Ellipse e = new Ellipse(x1, y1, w, h, borderColor, fillColor);
-                        figs.add(e);
-                    } else if (evt.getKeyChar() == 't') {
-                        Triangle t = new Triangle(x1, y1, x2, y2, x3, y3, borderColor, fillColor);
-                        figs.add(t);
+                    if (fig != null) {
+                        figs.add(fig);
                     }
-
+                    
                     repaint();
                 }
             }

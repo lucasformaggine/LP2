@@ -49,7 +49,7 @@ class ListFrame extends JFrame {
                         repaint();  // outer.repaint()
                     }
 
-                    if (evt .getKeyChar() == 'e') {
+                    if (evt.getKeyChar() == 'e') {
                         int x = rand.nextInt(350);
                         int y = rand.nextInt(350);
                         int w = rand.nextInt(50);
@@ -74,10 +74,11 @@ class ListFrame extends JFrame {
         for (Rect r: this.rs) {
             r.Paint(g);
         }
-
+        
         for (Ellipse e: this.el) {
             e.Paint(g);
         }
+
     }   
 }
 
