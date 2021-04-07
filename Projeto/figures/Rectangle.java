@@ -2,11 +2,11 @@ package figures;
 
 import java.awt.*;
 
-public class Rect extends Figure {
+public class Rectangle extends Figure {
     private int x, y;
     private int w, h;
 
-    public Rect(int x, int y, int w, int h, Color borderColor, Color fillColor) {
+    public Rectangle(int x, int y, int w, int h, Color borderColor, Color fillColor) {
         this.x = x;
         this.y = y;
 
@@ -17,7 +17,7 @@ public class Rect extends Figure {
         this.fillColor = fillColor;
     }
 
-    public Rect(int x, int y, int w, int h) {
+    public Rectangle(int x, int y, int w, int h) {
         this.x = x;
         this.y = y;
 
