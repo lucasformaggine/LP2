@@ -3,53 +3,63 @@ package figures;
 import java.awt.*;
 
 public class Triangle extends Figure {
-    private int x1, y1;
-    private int x2, y2;
-    private int x3, y3;
+    Polygon triangle;
+    int xArray[], yArray[];
 
-    public Triangle(int x1, int y1, int x2, int y2, int x3, int y3, Color borderColor, Color fillColor) {
-        this.x1 = x1;
-        this.y1 = y1;
-
-        this.x2 = x2;
-        this.y2 = y2;
-
-        this.x3 = x3;
-        this.y3 = y3;
-
-        this.borderColor = borderColor;
-        this.fillColor = fillColor;
+    public Triangle(int x, int y, int width, int height, Color borderColor, Color fillColor) {
+        super(x, y, width, height, borderColor, fillColor);
     }
 
-    public Triangle(int x1, int y1, int x2, int y2, int x3, int y3) {
-        this.x1 = x1;
-        this.y1 = y1;
-
-        this.x2 = x2;
-        this.y2 = y2;
-
-        this.x3 = x3;
-        this.y3 = y3;
-
-        this.borderColor = getRandomColor();
-        this.fillColor = getRandomColor();
+    public Triangle(int x, int y, int width, int height) {
+        super(x, y, width, height, Color.BLACK, Color.WHITE);
     }
 
+    @Override
     public void Paint(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
 
-        g2d.setColor(borderColor);
+        int x1 = this.x;
+        int y1 = this.y;
+        int x2 = x1;
+        int y2 = y1 + this.height;
+        int x3 = x1 + this.width;
+        int y3 = y1 + this.height;
 
-        g2d.drawLine(this.x1, this.y1, this.x2, this.y2);
-        g2d.drawLine(this.x2, this.y2, this.x3, this.y3);
-        g2d.drawLine(this.x3, this.y3, this.x1, this.y1);
+        int xValues[] = {x1, x2, x3};
+        int yValues[] = {y1, y2, y3};
 
-        int x[] = {this.x1, this.x2, this.x3};
-        int y[] = {this.y1, this.y2, this.y3};
-
-        Polygon TriangleInterior = new Polygon(x, y, 3);
+        this.xArray = xValues;
+        this.yArray = yValues;
+        
+        this.triangle = new Polygon(xArray, yArray, 3);
+        
+        g2d.setStroke(new BasicStroke(1));
 
         g2d.setColor(fillColor);
-        g2d.fillPolygon(TriangleInterior);
+        g2d.fillPolygon(this.triangle);
+
+        g2d.setColor(borderColor);
+        g2d.drawPolygon(this.triangle);
+    }
+
+    @Override
+    public boolean IsInsideFigure(Point mousePointPosition) {
+        return this.triangle.contains(mousePointPosition);
+    }
+
+    @Override
+    public void applyRedSelection(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+
+        g2d.setStroke(new BasicStroke(1.5f));
+
+        g2d.setColor(Color.RED);
+        g2d.drawPolygon(this.triangle);
+    }
+
+    @Override
+    public void drag(int dx, int dy) {
+        this.x += dx;
+        this.y += dy;
     }
 }

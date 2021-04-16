@@ -16,10 +16,8 @@ public class Frame extends JFrame {
     ArrayList<Figure> figures = new ArrayList<Figure>();
     Figure selectedFigure = null;
 
-    KeyButtonHandler keyButtonHandler = new KeyButtonHandler();
-    
     Point mousePointPosition = new Point(0, 0);
-    
+
     public Frame() {
         this.addWindowListener (
             new WindowAdapter() {
@@ -29,11 +27,28 @@ public class Frame extends JFrame {
             }
         );
 
+        this.addMouseListener (
+            new MouseAdapter() {
+                public void mousePressed(MouseEvent mouseEvent) {
+                    selectedFigure = MouseButtonHandler.SelectFigure(mouseEvent, figures, selectedFigure);
+                    mouseMoved(mouseEvent); 
+                    repaint();
+                }
+            }
+
+        );
+
         this.addMouseMotionListener (
             new MouseAdapter() {
                 public void mouseMoved(MouseEvent mouseEvent) {
                     mousePointPosition.x = mouseEvent.getX();
                     mousePointPosition.y = mouseEvent.getY();
+                }
+
+                public void mouseDragged(MouseEvent mouseEvent) {
+                    selectedFigure = MouseButtonHandler.SelectAndDragFigure(mouseEvent, figures, selectedFigure, mousePointPosition);
+                    mouseMoved(mouseEvent);
+                    repaint();
                 }
             }
         );
@@ -41,21 +56,32 @@ public class Frame extends JFrame {
         this.addKeyListener (
             new KeyAdapter() {
                 public void keyPressed(KeyEvent keyEvent) {
-                    keyButtonHandler.KeyButtonPressed(keyEvent, figures, selectedFigure, mousePointPosition);
+                    selectedFigure = KeyButtonHandler.KeyButtonPressed(keyEvent, figures, selectedFigure, mousePointPosition);
                     repaint();
                 }
             }
         );
 
+        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+
+        int userWidth = gd.getDisplayMode().getWidth();
+        int userHeight = gd.getDisplayMode().getHeight();
+
         this.setTitle("Vectorial Graphic Editor");
-        this.setSize(500, 500);
+        this.setSize(userWidth, userHeight);
     }
 
+    @Override
     public void paint(Graphics g) {
         super.paint(g);
 
-        for (Figure fig: this.figures) {
-            fig.Paint(g);
+        for (Figure figure: this.figures) {
+            figure.Paint(g);
         }
+
+        if (selectedFigure != null) {
+            selectedFigure.applyRedSelection(g);
+        }
+
     }
 }
