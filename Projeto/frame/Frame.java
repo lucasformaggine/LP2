@@ -19,6 +19,8 @@ public class Frame extends JFrame {
     Point mousePointPosition = new Point(0, 0);
 
     public Frame() {
+        this.setFocusTraversalKeysEnabled(false);
+        
         this.addWindowListener (
             new WindowAdapter() {
                 public void windowClosing(WindowEvent windowEvent) {

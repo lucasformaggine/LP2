@@ -33,7 +33,7 @@ public class Triangle extends Figure {
         
         this.triangle = new Polygon(xArray, yArray, 3);
         
-        g2d.setStroke(new BasicStroke(1));
+        g2d.setStroke(new BasicStroke(defaultThickness));
 
         g2d.setColor(fillColor);
         g2d.fillPolygon(this.triangle);
@@ -51,15 +51,44 @@ public class Triangle extends Figure {
     public void applyRedSelection(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
 
-        g2d.setStroke(new BasicStroke(1.5f));
+        g2d.setStroke(new BasicStroke(defaultThickness));
 
         g2d.setColor(Color.RED);
         g2d.drawPolygon(this.triangle);
     }
 
     @Override
-    public void drag(int dx, int dy) {
-        this.x += dx;
-        this.y += dy;
+    public void move(int dx, int dy) {
+        super.move(dx, dy);
+    }
+
+    @Override
+    public void dragFigure(Point mousePointPosition, int dx, int dy) {
+        Point pointToResize = new Point(this.xArray[2], this.yArray[2]);
+
+        if (pointToResize.distance(mousePointPosition) <= 5) {
+            if (this.width + dx >= 10) {
+                this.width += dx;
+            }
+
+            if (this.height + dy >= 10) {
+                this.height += dy;
+            }
+        } else {
+            move(dx, dy);
+        }
+
+        int x1 = this.x;
+        int y1 = this.y;
+        int x2 = x1;
+        int y2 = y1 + this.height;
+        int x3 = x1 + this.width;
+        int y3 = y1 + this.height;
+
+        int xValues[] = {x1, x2, x3};
+        int yValues[] = {y1, y2, y3};
+
+        this.xArray = xValues;
+        this.yArray = yValues;
     }
 }

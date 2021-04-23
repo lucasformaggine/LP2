@@ -36,7 +36,7 @@ public class MouseButtonHandler {
 
     public static Figure SelectAndDragFigure(MouseEvent mouseEvent, ArrayList<Figure> figures, Figure selectedFigure, Point mousePointPosition) {
         if (selectedFigure != null) {
-            selectedFigure.drag(mouseEvent.getX() - mousePointPosition.x, mouseEvent.getY() - mousePointPosition.y);
+            selectedFigure.dragFigure(mousePointPosition, mouseEvent.getX() - mousePointPosition.x, mouseEvent.getY() - mousePointPosition.y);
         }
 
         return selectedFigure;
