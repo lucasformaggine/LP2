@@ -5,8 +5,6 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import handlers.*;
-
 public abstract class Figure {
     protected Color borderColor;
     protected Color fillColor;
