@@ -34,7 +34,6 @@ public abstract class Figure {
     public abstract boolean IsInsideFigure(Point mousePointPosition);
     public abstract void applyRedSelection(Graphics g);
     public abstract void dragFigure(Point mousePointPosition, int dx, int dy);
-    //public abstract void resize(Point mousePointPosition, int dx, int dy);
 
     public void move(int dx, int dy) {
         GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();

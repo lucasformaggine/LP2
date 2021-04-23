@@ -35,7 +35,7 @@ public class Ellipse extends Figure {
 
     @Override
     public boolean IsInsideFigure(Point mousePointPosition) {
-        return (mousePointPosition.x >= this.x) && (mousePointPosition.x <= this.x + width) && (mousePointPosition.y >= this.y) && (mousePointPosition.y <= this.y + height);
+        return this.ellipse.contains(mousePointPosition);
     }
 
     @Override
