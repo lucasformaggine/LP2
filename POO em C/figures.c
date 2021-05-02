@@ -5,12 +5,14 @@ typedef struct {
     int redColor, greenColor, blueColor;
 } Color;
 
-typedef struct {
+typedef struct Figure {
     int x, y;
     int width, height;
     Color borderColor, fillColor;
     void (*print) (struct Figure*);
 } Figure;
+
+typedef void (*Figure_Print) (struct Figure*);
 
 typedef struct {
     Figure super;
@@ -59,7 +61,7 @@ Ellipse* Ellipse_New(int x, int y, int width, int height, Color borderColor, Col
     super->height = height;
     super->borderColor = borderColor;
     super->fillColor = fillColor;
-    super->print = Ellipse_Print;
+    super->print = (Figure_Print) Ellipse_Print;
 }
 
 void Ellipse_Print(Ellipse* this) {
@@ -84,7 +86,7 @@ Triangle* Triangle_New(int x, int y, int width, int height, Color borderColor, C
     super->height = height;
     super->borderColor = borderColor;
     super->fillColor = fillColor;
-    super->print = Triangle_Print;
+    super->print = (Figure_Print) Triangle_Print;
 }
 
 void Triangle_Print(Triangle* this) {
