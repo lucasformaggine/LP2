@@ -7,18 +7,17 @@ typedef struct {
 
 typedef struct {
     int x, y;
+    int width, height;
     Color borderColor, fillColor;
     void (*print) (struct Figure*);
 } Figure;
 
 typedef struct {
     Figure super;
-    int width, height;
 } Ellipse;
 
 typedef struct {
     Figure super;
-    int width, height;
 } Triangle;
 
 Triangle* Triangle_New(int, int, int, int, Color, Color);
@@ -56,19 +55,18 @@ Ellipse* Ellipse_New(int x, int y, int width, int height, Color borderColor, Col
 
     super->x = x;
     super->y = y;
+    super->width = width;
+    super->height = height;
     super->borderColor = borderColor;
     super->fillColor = fillColor;
     super->print = Ellipse_Print;
-
-    this->width = width;
-    this->height = height;
 }
 
 void Ellipse_Print(Ellipse* this) {
     Figure* super = (Figure*) this;
 
     printf("Elipse de tamanho (%d, %d) na posicao (%d, %d).\n",
-           this->width, this->height, super->x, super->y);
+           super->width, super->height, super->x, super->y);
 
     printf("Cor de borda: (%d, %d, %d). Cor de fundo: (%d, %d, %d).\n",
         super->borderColor.redColor, super->borderColor.greenColor, super->borderColor.blueColor,
@@ -82,19 +80,18 @@ Triangle* Triangle_New(int x, int y, int width, int height, Color borderColor, C
 
     super->x = x;
     super->y = y;
+    super->width = width;
+    super->height = height;
     super->borderColor = borderColor;
     super->fillColor = fillColor;
     super->print = Triangle_Print;
-
-    this->width = width;
-    this->height = height;
 }
 
 void Triangle_Print(Triangle* this) {
     Figure* super = (Figure*) this;
 
     printf("Triangulo de vertices (%d, %d), (%d, %d) e (%d, %d).\n",
-        super->x, super->y, super->x, super->y + this->height, super->x + this->width, super->y + this->height);
+        super->x, super->y, super->x, super->y + super->height, super->x + super->width, super->y + super->height);
 
     printf("Cor de borda: (%d, %d, %d). Cor de fundo: (%d, %d, %d).\n",
         super->borderColor.redColor, super->borderColor.greenColor, super->borderColor.blueColor,
