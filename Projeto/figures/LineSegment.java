@@ -7,18 +7,18 @@ import java.awt.geom.*;
 public class LineSegment extends Figure {
     private int x1, y1;
     private int x2, y2;
-    private Color lineColor;
+    private Color borderColor;
     Line2D lineSegment;
     
 
-    public LineSegment(int x1, int y1, Color lineColor) {
-        super(0, 0, 0, 0, lineColor, lineColor);
+    public LineSegment(int x1, int y1, Color borderColor) {
+        super(0, 0, 0, 0, borderColor, borderColor);
 
         this.x1 = x1;
         this.y1 = y1;
         this.x2 = x1 + 2*defaultSize;
         this.y2 = y1;
-        this.lineColor = lineColor;
+        this.borderColor = borderColor;
 
         this.lineSegment = new Line2D.Float(this.x1, this.y1, this.x2, this.y2); 
     }
@@ -30,7 +30,7 @@ public class LineSegment extends Figure {
         this.y1 = y1;
         this.x2 = x1 + 2*defaultSize;
         this.y2 = y1;
-        this.lineColor = Color.BLACK;
+        this.borderColor = Color.BLACK;
 
         this.lineSegment = new Line2D.Float(this.x1, this.y1, this.x2, this.y2); 
     }
@@ -41,7 +41,7 @@ public class LineSegment extends Figure {
         
         g2d.setStroke(new BasicStroke(2.5f));
 
-        g2d.setColor(lineColor);
+        g2d.setColor(borderColor);
         g2d.drawLine(this.x1, this.y1, this.x2, this.y2);
     }
 

@@ -4,4 +4,4 @@ class GraphicEditor {
         Frame frame = new Frame();
         frame.setVisible(true);
     }
-}
+} 

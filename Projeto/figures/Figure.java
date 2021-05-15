@@ -5,16 +5,21 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public abstract class Figure {
+import interfaces.IVisible;
+public abstract class Figure implements IVisible {
     protected Color borderColor;
     protected Color fillColor;
     protected int x, y;
     protected int width, height;
     protected static int defaultSize = 100;
     protected static float defaultThickness = 2.5f;
-    public int colorPalletIndex = 0;
+    public int fillColorIndex = 0;
+    public int borderColorIndex = 10;
 
-    ArrayList<Color> colorPallet = new ArrayList<Color>(
+    ArrayList<Color> fillColorPallet = new ArrayList<Color>(
+        Arrays.asList(Color.WHITE, Color.GRAY, Color.MAGENTA, Color.BLUE, Color.CYAN, Color.GREEN, Color.YELLOW, Color.ORANGE, Color.RED, Color.DARK_GRAY, Color.BLACK));
+
+    ArrayList<Color> borderColorPallet = new ArrayList<Color>(
         Arrays.asList(Color.WHITE, Color.GRAY, Color.MAGENTA, Color.BLUE, Color.CYAN, Color.GREEN, Color.YELLOW, Color.ORANGE, Color.RED, Color.DARK_GRAY, Color.BLACK));
 
     protected Figure(int x, int y, int width, int height, Color borderColor, Color fillColor) {
@@ -29,8 +34,20 @@ public abstract class Figure {
     }
 
     public abstract void Paint(Graphics g);
-    public abstract boolean IsInsideFigure(Point mousePointPosition);
-    public abstract void applyRedSelection(Graphics g);
+
+    public boolean IsInsideFigure(Point mousePointPosition) {
+        return (mousePointPosition.x >= this.x) && (mousePointPosition.x <= this.x + width) && (mousePointPosition.y >= this.y) && (mousePointPosition.y <= this.y + height);
+    }
+
+    public void applyRedSelection(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+
+        g2d.setStroke(new BasicStroke(1.5f));
+
+        g2d.setColor(Color.RED);
+        g2d.drawRect(this.x, this.y, this.width, this.height);
+    }
+
     public abstract void dragFigure(Point mousePointPosition, int dx, int dy);
 
     public void move(int dx, int dy) {
@@ -48,7 +65,11 @@ public abstract class Figure {
         }
     }
 
-    public void applyColorChange() {
-        this.fillColor = this.colorPallet.get(this.colorPalletIndex);
+    public void applyFillColorChange() {
+        this.fillColor = this.fillColorPallet.get(this.fillColorIndex);
+    }   
+
+    public void applyBorderColorChange() {
+        this.borderColor = this.borderColorPallet.get(this.borderColorIndex);
     }   
 }

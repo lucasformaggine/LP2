@@ -54,8 +54,8 @@ public class Triangle extends Figure {
         g2d.setStroke(new BasicStroke(defaultThickness));
 
         g2d.setColor(Color.RED);
-        g2d.drawPolygon(this.triangle);
-    }
+        g2d.drawPolygon(this.xArray, this.yArray, 3);
+    }   
 
     @Override
     public void move(int dx, int dy) {

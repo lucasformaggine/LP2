@@ -33,20 +33,13 @@ public class Ellipse extends Figure {
         g2d.fill(ellipse);
     }
 
-    @Override
     public boolean IsInsideFigure(Point mousePointPosition) {
-        return (mousePointPosition.x >= this.x) && (mousePointPosition.x <= this.x + width) && (mousePointPosition.y >= this.y) && (mousePointPosition.y <= this.y + height);
+        return super.IsInsideFigure(mousePointPosition);
     }
 
-    @Override
     public void applyRedSelection(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
-
-        g2d.setStroke(new BasicStroke(defaultThickness));
-
-        g2d.setColor(Color.RED);
-        g2d.drawRect(this.x, this.y, this.width, this.height);
-    }
+        super.applyRedSelection(g);
+    }   
 
     @Override
     public void move(int dx, int dy) {
