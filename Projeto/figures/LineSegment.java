@@ -10,7 +10,6 @@ public class LineSegment extends Figure {
     private Color borderColor;
     Line2D lineSegment;
     
-
     public LineSegment(int x1, int y1, Color borderColor) {
         super(0, 0, 0, 0, borderColor, borderColor);
 
