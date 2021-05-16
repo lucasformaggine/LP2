@@ -3,7 +3,6 @@ package figures;
 import java.awt.*;
 import java.awt.geom.*;
 
-
 public class LineSegment extends Figure {
     private int x1, y1;
     private int x2, y2;

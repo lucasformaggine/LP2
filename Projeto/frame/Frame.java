@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import figures.*;
 import handlers.*;
+
 public class Frame extends JFrame {
     private static final long serialVersionUID = 1L;
 

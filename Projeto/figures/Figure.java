@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import interfaces.IVisible;
+
 public abstract class Figure implements IVisible {
     protected Color borderColor;
     protected Color fillColor;
