@@ -5,9 +5,11 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import java.io.*;
+
 import interfaces.IVisible;
 
-public abstract class Figure implements IVisible {
+public abstract class Figure implements IVisible, Serializable {
     protected Color borderColor;
     protected Color fillColor;
     protected int x, y;

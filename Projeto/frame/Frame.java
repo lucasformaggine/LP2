@@ -4,9 +4,11 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.Point;
 
-import javax.swing.*;
+import java.io.*;
 
 import java.util.ArrayList;
+
+import javax.swing.*;
 
 import figures.*;
 import handlers.*;
@@ -20,11 +22,33 @@ public class Frame extends JFrame {
     Point mousePointPosition = new Point(0, 0);
 
     public Frame() {
+        try {
+            FileInputStream file = new FileInputStream("project.bin");
+            ObjectInputStream object = new ObjectInputStream(file);
+
+            this.figures = (ArrayList<Figure>) object.readObject();
+
+            object.close();
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+        }
+
         this.setFocusTraversalKeysEnabled(false);
         
         this.addWindowListener (
             new WindowAdapter() {
                 public void windowClosing(WindowEvent windowEvent) {
+                    try {
+                        FileOutputStream file = new FileOutputStream("project.bin");
+                        ObjectOutputStream object = new ObjectOutputStream(file);
+
+                        object.writeObject(figures);
+                        object.flush();
+                        object.close();
+                    } catch (Exception exception) {
+                        System.out.println(exception.getMessage());
+                    }
+
                     System.exit(0);
                 }
             }
