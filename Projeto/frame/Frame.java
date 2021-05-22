@@ -109,6 +109,5 @@ public class Frame extends JFrame {
         if (selectedFigure != null) {
             selectedFigure.applyRedSelection(g);
         }
-
     }
 }
