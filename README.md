@@ -26,3 +26,23 @@ A ementa consiste em:
 - Free Electronic Book: "Thinking in Java", 3rd Edition.
 - Ken Arnold, J. Gosling, D. Holmes, "The Java(TM)Programming Language", 3rd Edition, Addison-Wesley, 2000.
 - Cay Horstmann, Gary Cornell. "Core Java 2, Vol. I: Fundamentals" (6th Edition), Prentice Hall, 2002.
+
+## Projeto
+- Editor gráfico vetorial, que desenha retângulos, elipses, triângulos e segmentos de reta, permitindo mover, redimensionar (pelo canto inferior direito das figuras),
+deletar e pintar a figura através de botões e teclas;
+- As figuras ficam salvas em um arquivo criado após o fechamento do programa (project.bin), e são carregados
+com a sua abertura;
+- A janela, por padrão, abre de acordo com a resolução do monitor (no caso de mais de um monitor, do monitor padrão).
+
+### Comandos
+- Botão esquerdo do mouse: seleciona uma figura ou um botão. No caso de um botão selecionado, clicar novamente em uma
+região vazia cria a figura selecionada; no caso da figura, permite editá-la
+- DEL: deleta a figura selecionada
+- TAB: troca para a próxima figura selecionada
+- PAGEUP e PAGEDOWN: alternam a cor do interior das figuras com as possíveis cores: branco, cinza, magenta, azul, ciano, verde, amarelo, laranja, vermelho, cinza escuro e preto
+- VIRGULA e PONTO: alternam a cor da borda das figuras com as mesmas cores citadas acima
+- UP, DOWN, LEFT, RIGHT: movem a figura poucas posições para a direção selecionada
+- R: cria um retângulo na posição do mouse
+- E: cria uma elipse na posição do mouse
+- T: cria um triângulo na posição do mouse
+- L: cria um segmento de reta na posição do mouse
