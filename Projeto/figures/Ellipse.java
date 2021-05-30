@@ -34,7 +34,7 @@ public class Ellipse extends Figure {
     }
 
     public boolean IsInsideFigure(Point mousePointPosition) {
-        return super.IsInsideFigure(mousePointPosition);
+        return (mousePointPosition.x >= this.x) && (mousePointPosition.x <= this.x + this.width) && (mousePointPosition.y >= this.y) && (mousePointPosition.y <= this.y + this.height);
     }
 
     public void applyRedSelection(Graphics g) {
