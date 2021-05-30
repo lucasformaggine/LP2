@@ -11,8 +11,9 @@ import buttons.*;
 
 public class MouseButtonHandler {
     private static final int defaultSize = 100;
-    public class MouseButtons {
-        public static final int MOUSE1 = 1;
+    
+    private class MouseButtons {
+        private static final int MOUSE1 = 1;
     }
 
     public static Figure SelectFigure(MouseEvent mouseEvent, ArrayList<Figure> figures, Figure selectedFigure) {

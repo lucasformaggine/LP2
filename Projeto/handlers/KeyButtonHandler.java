@@ -9,17 +9,18 @@ import java.util.ArrayList;
 
 public class KeyButtonHandler {
     private static final int defaultSize = 100;
-    public class KeyButtons {
-        public static final int DEL = 127;
-        public static final int TAB = 9; 
-        public static final int UP = 38;
-        public static final int DOWN = 40;
-        public static final int LEFT = 37;
-        public static final int RIGHT = 39;
-        public static final int PAGEUP = 33;
-        public static final int PAGEDOWN = 34;
-        public static final int PERIOD = 46;
-        public static final int COMMA = 44;
+    
+    private class KeyButtons {
+        private static final int DEL = 127;
+        private static final int TAB = 9; 
+        private static final int UP = 38;
+        private static final int DOWN = 40;
+        private static final int LEFT = 37;
+        private static final int RIGHT = 39;
+        private static final int PAGEUP = 33;
+        private static final int PAGEDOWN = 34;
+        private static final int PERIOD = 46;
+        private static final int COMMA = 44;
     }
 
     public static Figure KeyButtonPressed(KeyEvent keyEvent, ArrayList<Figure> figures, Figure selectedFigure, Point mousePointPosition) {
