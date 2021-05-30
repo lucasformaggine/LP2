@@ -33,7 +33,7 @@ public class KeyButtonHandler {
             Triangle triangle = new Triangle(mousePointPosition.x, mousePointPosition.y, defaultSize, defaultSize);
             figures.add(triangle);
         } else if (keyEvent.getKeyChar() == 'l') {
-            LineSegment line = new LineSegment(mousePointPosition.x, mousePointPosition.y);
+            LineSegment line = new LineSegment(mousePointPosition.x, mousePointPosition.y, defaultSize);
             figures.add(line);
         } else if (keyEvent.getKeyCode() == KeyButtons.TAB) {
             if (selectedFigure == null) {
