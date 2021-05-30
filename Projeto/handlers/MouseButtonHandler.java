@@ -7,8 +7,10 @@ import java.util.ArrayList;
 
 import figures.*;
 
-public class MouseButtonHandler {
+import buttons.*;
 
+public class MouseButtonHandler {
+    private static final int defaultSize = 100;
     public class MouseButtons {
         public static final int MOUSE1 = 1;
     }
@@ -32,6 +34,60 @@ public class MouseButtonHandler {
         }
 
         return selectedFigure;
+    }
+
+    public static Button SelectButton(MouseEvent mouseEvent, ArrayList<Button> buttons, Button selectedButton) {
+        selectedButton = null;
+
+        if (mouseEvent.getButton() == MouseButtons.MOUSE1) {
+            Point mousePointPosition = new Point(mouseEvent.getX(), mouseEvent.getY());
+
+            for (Button button : buttons) {
+                if (button.IsInsideFigure(mousePointPosition) == true) {
+                    selectedButton = button;
+                }
+            }
+        }
+
+        return selectedButton;
+    }
+
+    public static Button CreateFigureByButton(MouseEvent mouseEvent, ArrayList<Button> buttons, Button selectedButton, ArrayList<Figure> figures) {
+        if (selectedButton != null && mouseEvent.getButton() == MouseButtons.MOUSE1) {
+            Point mousePointPosition = new Point(mouseEvent.getX(), mouseEvent.getY());
+            boolean isClickingInButton = false;
+
+            for (Button button : buttons) {
+                if (button.IsInsideFigure(mousePointPosition) == true) {
+                    isClickingInButton = true;
+                }
+            }
+
+            if (isClickingInButton == false) {
+                switch (selectedButton.buttonIndex) {
+                    case 0:
+                        Rect rectangle = new Rect(mousePointPosition.x, mousePointPosition.y, defaultSize, defaultSize);
+                        figures.add(rectangle);
+                        break;
+                    case 1:
+                        Ellipse ellipse = new Ellipse(mousePointPosition.x, mousePointPosition.y, defaultSize, defaultSize);
+                        figures.add(ellipse);
+                        break;
+                    case 2:
+                        Triangle triangle = new Triangle(mousePointPosition.x, mousePointPosition.y, defaultSize, defaultSize);
+                        figures.add(triangle);
+                        break;
+                    case 3:
+                        LineSegment line = new LineSegment(mousePointPosition.x, mousePointPosition.y, defaultSize);
+                        figures.add(line);
+                        break;
+                    default:
+                }
+            }
+            
+            selectedButton = null;
+        }
+        return selectedButton;
     }
 
     public static Figure SelectAndDragFigure(MouseEvent mouseEvent, ArrayList<Figure> figures, Figure selectedFigure, Point mousePointPosition) {

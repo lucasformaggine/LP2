@@ -1,8 +1,11 @@
 package frame;
 
-import java.awt.*;
+import java.awt.Color;
 import java.awt.event.*;
 import java.awt.Point;
+import java.awt.GraphicsEnvironment;
+import java.awt.Graphics;
+import java.awt.GraphicsDevice;
 
 import java.io.*;
 
@@ -13,11 +16,23 @@ import javax.swing.*;
 import figures.*;
 import handlers.*;
 
+import buttons.*;
 public class Frame extends JFrame {
     private static final long serialVersionUID = 1L;
 
     ArrayList<Figure> figures = new ArrayList<Figure>();
+
+    ArrayList<Button> buttons = new ArrayList<Button>() {
+        {
+            add(new Button(new Rect(40, 60, 30, 30), 0));
+            add(new Button(new Ellipse(40, 115, 30, 30), 1));
+            add(new Button(new Triangle(40, 170, 30, 30), 2));
+            add(new Button(new LineSegment(40, 240, 15), 3));
+        }
+    };
+
     Figure selectedFigure = null;
+    Button selectedButton = null;
 
     Point mousePointPosition = new Point(0, 0);
 
@@ -58,11 +73,19 @@ public class Frame extends JFrame {
             new MouseAdapter() {
                 public void mousePressed(MouseEvent mouseEvent) {
                     selectedFigure = MouseButtonHandler.SelectFigure(mouseEvent, figures, selectedFigure);
+
+                    selectedButton = MouseButtonHandler.CreateFigureByButton(mouseEvent, buttons, selectedButton, figures);
+
+                    selectedButton = MouseButtonHandler.SelectButton(mouseEvent, buttons, selectedButton);
+
+                    if (selectedButton != null) {
+                        selectedFigure = null;
+                    }
+
                     mouseMoved(mouseEvent); 
                     repaint();
                 }
             }
-
         );
 
         this.addMouseMotionListener (
@@ -102,12 +125,22 @@ public class Frame extends JFrame {
     public void paint(Graphics g) {
         super.paint(g);
 
+        
         for (Figure figure: this.figures) {
             figure.Paint(g);
+        }
+        
+        for (Button button: this.buttons) {
+            button.Paint(g);
         }
 
         if (selectedFigure != null) {
             selectedFigure.applyRedSelection(g);
         }
+
+        if (selectedButton != null) {
+            selectedButton.applyRedSelection(g);
+        }
+
     }
 }
