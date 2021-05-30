@@ -14,7 +14,6 @@ public abstract class Figure implements IVisible, Serializable {
     protected Color fillColor;
     protected int x, y;
     protected int width, height;
-    protected static int defaultSize = 100;
     protected static float defaultThickness = 2.5f;
     public int fillColorIndex = 0;
     public int borderColorIndex = 10;
@@ -38,9 +37,7 @@ public abstract class Figure implements IVisible, Serializable {
 
     public abstract void Paint(Graphics g);
 
-    public boolean IsInsideFigure(Point mousePointPosition) {
-        return (mousePointPosition.x >= this.x) && (mousePointPosition.x <= this.x + width) && (mousePointPosition.y >= this.y) && (mousePointPosition.y <= this.y + height);
-    }
+    public abstract boolean IsInsideFigure(Point mousePointPosition);
 
     public void applyRedSelection(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
